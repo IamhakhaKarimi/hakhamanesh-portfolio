@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakhamanesh Karimi | Educator, Counselor & Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: { 
+                        brandBlue: '#dbeafe',
+                        brandGreen: '#d1fae5',
+                        accentBlue: '#3b82f6',
+                        ctaGreen: '#10b981'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .skill-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+        .timeline-line::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #e5e7eb; }
+        @media (min-width: 768px) { .timeline-line::before { left: 50%; } }
+        .swiper-container { width: 100%; height: 100%; }
+        
+        /* Enhanced Slider Navigation Styles */
+        .slider-wrapper {
+            position: relative;
+        }
+        
+        .swiper-nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #1f2937;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .swiper-nav-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .swiper-nav-button:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+        
+        .swiper-nav-button.prev {
+            left: 20px;
+        }
+        
+        .swiper-nav-button.next {
+            right: 20px;
+        }
+        
+        /* Pagination Enhancement */
+        .swiper-pagination {
+            bottom: 20px !important;
+        }
+        
+        .swiper-pagination-bullet {
+            background: rgba(255, 255, 255, 0.6) !important;
+            width: 12px !important;
+            height: 12px !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: rgba(255, 255, 255, 1) !important;
+            width: 32px !important;
+            border-radius: 6px !important;
+        }
+        
+        /* Slide Counter */
+        .slide-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 30;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .swiper-nav-button {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .swiper-nav-button.prev {
+                left: 10px;
+            }
+            
+            .swiper-nav-button.next {
+                right: 10px;
+            }
+            
+            .slide-counter {
+                top: 10px;
+                right: 10px;
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+        
+        /* Certificate Card Styles */
+        .certificate-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .certificate-card:hover {
+            transform: translateX(4px);
+            border-left-color: #10b981;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
+        }
+        
+        .certificate-card:hover::before {
+            left: 100%;
+        }
+        
+        .certificate-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #3b82f6, #10b981);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        
+        /* Language Badge Styles */
+        .language-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #dbeafe 0%, #d1fae5 100%);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            font-weight: 600;
+            color: #1f2937;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .language-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .language-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+        }
+        
+        .language-badge:hover::before {
+            left: 100%;
+        }
+        
+        .language-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="bg-[#f9fafb] text-gray-800 antialiased font-sans">
+
+    <nav class="fixed w-full z-50 glass shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span class="text-xl font-bold text-gray-900 tracking-tight">Hakhamanesh Karimi</span>
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="index.html" class="hover:text-accentBlue transition">Home</a>
+                <a href="#experience" class="hover:text-accentBlue transition">Experience</a>
+                <a href="#skills" class="hover:text-accentBlue transition">Skills</a>
+                <a href="contact.html" class="hover:text-accentBlue transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-40 pb-20 bg-gradient-to-br from-brandBlue to-white text-center px-6">
+        <div data-aos="fade-up">
+            <img src="assets/profile.jpg" alt="Hakhamanesh Karimi" class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-6 border-4 border-white shadow-lg object-cover">
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6">Hakhamanesh Karimi</h1>
+            <p class="text-xl md:text-3xl text-gray-600 mb-8 font-light italic">Educator, Counselor & Developer</p>
+            <div class="flex justify-center space-x-6 mb-12">
+                <a href="https://af.linkedin.com/in/hakhamaneshkarimi" target="_blank" class="text-3xl text-[#0077b5] hover:scale-110 transition"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/iamhakhamanesh/" target="_blank" class="text-3xl text-[#e4405f] hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
+            </div>
+            <a href="#experience" class="bg-ctaGreen hover:bg-green-600 text-white px-12 py-4 rounded-full font-bold shadow-xl transition-all inline-block hover:-translate-y-1">
+                Explore My Work
+            </a>
+        </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 mb-32" data-aos="fade-up">
+        <div class="slider-wrapper">
+            <div class="swiper mySwiper rounded-[2rem] shadow-2xl overflow-hidden aspect-[16/9] md:aspect-[21/9]">
+                <div class="swiper-wrapper">
+                    
+                    <div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_1.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_1.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div>
+			------------
+ 			<div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_2.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_2.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div>
+			
+			<div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_3.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_3.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div>
+		
+			<div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_4.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_4.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div>
+<div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_5.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_5.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_6.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_6.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_7.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_7.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_8.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_8.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_9.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_9.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_10.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_10.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_11.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_11.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_12.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_12.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_13.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_13.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_14.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_14.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
+                        <img src="assets/slider_15.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <!-- Main Image -->
+                        <img src="assets/slider_15.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <!-- Caption Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div>
+                    <div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <img src="assets/slider_2.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <img src="assets/slider_2.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"> </h3>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
+                        <img src="assets/slider_3.jpg" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
+                        <img src="assets/slider_3.jpg" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
+                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
+                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
+                        </div>
+                    </div>
+		
+                    </div>
+                    -->
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <button class="swiper-nav-button prev" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="swiper-nav-button next" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <!-- Slide Counter -->
+                <div class="slide-counter">
+                    <span class="current-slide">1</span> / <span class="total-slides">4</span>
+                </div>
+                
+                <!-- Pagination Dots -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-white px-6" data-aos="fade-up">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-12">About Me</h2>
+            <p class="text-lg text-gray-600 leading-relaxed">
+                Master of Psychology and Bachelor of Software Engineering with 7 years of experience in educational counseling, working with children with special needs, and IT jobs (Python, Java, Android and Web Development). Winner of Top 5 National Afghan IT Projects held by Ministry of Higher Education of Afghanistan (2017). Builder and Developer of Android DARMAAN App with more than hundreds of users around the country. Counselor of SAT and TOEFL test in Afghan-Turk Schools. Robotics Educator and high school IT department manager.
+            </p>
+        </div>
+    </section>
+
+    <section id="skills" class="py-24 bg-gray-50 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">Expertise & Specialized Skills</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <div class="bg-blue-50 p-8 rounded-3xl border border-blue-100 skill-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-blue-500 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i class="fas fa-brain text-2xl"></i></div>
+                    <h3 class="text-xl font-bold mb-4">Psychology & Counseling</h3>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Counseling Approaches (CBT, ACT, SFBT)</li><li>• Applied Behavior Analysis (ABA)</li><li>• Neuroscience Counseling</li><li>• Wechsler IQ Testing (WAIS, WISC)</li><li>• Database Design</li>
+                    </ul>
+                </div>
+
+                <div class="bg-green-50 p-8 rounded-3xl border border-green-100 skill-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i class="fas fa-code text-2xl"></i></div>
+                    <h3 class="text-xl font-bold mb-4">Software Engineering</h3>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• PHP</li><li>• Python</li><li>• Tailwind</li><li>• Database Design</li>
+                    </ul>
+                </div>
+
+                <div class="bg-orange-50 p-8 rounded-3xl border border-orange-100 skill-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-orange-500 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i class="fas fa-robot text-2xl"></i></div>
+                    <h3 class="text-xl font-bold mb-4">Robotics Educator</h3>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• LEGO EVE3 Robotics</li><li>• Block Coding</li><li>• Arduino Robotics & Programming</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-24 bg-white px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-20" data-aos="fade-up">Professional Journey</h2>
+            <div class="relative timeline-line space-y-12">
+                
+                <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-right">
+                    <div class="md:w-1/2 md:pr-12 text-center md:text-right mb-4 md:mb-0">
+                        <time class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-xs font-bold uppercase">Mar 2025 — Nov 2025</time>
+                        <h4 class="text-xl font-bold text-gray-900 mt-2">ENGLISH TEACHER</h4>
+                        <p class="text-gray-500">Indigo SAPAT Primary School - Bishkek, Kyrgyzstan</p>
+                    </div>
+                    <div class="absolute left-5 md:left-1/2 w-3 h-3 bg-blue-500 rounded-full border-4 border-white shadow transform md:-translate-x-1.5"></div>
+                    <div class="md:w-1/2 md:pl-12"></div>
+                </div>
+
+                <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-left">
+                    <div class="md:w-1/2 md:pr-12"></div>
+                    <div class="absolute left-5 md:left-1/2 w-3 h-3 bg-green-500 rounded-full border-4 border-white shadow transform md:-translate-x-1.5"></div>
+                    <div class="md:w-1/2 md:pl-12 text-center md:text-left mb-4 md:mb-0">
+                        <time class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-xs font-bold uppercase">Summer 2025</time>
+                        <h4 class="text-xl font-bold text-gray-900 mt-2">REFUGEE CHILDREN INSTRUCTOR</h4>
+                        <p class="text-gray-500">AUCA University and Spirit of America Organization</p>
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-right">
+                    <div class="md:w-1/2 md:pr-12 text-center md:text-right mb-4 md:mb-0">
+                        <time class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-xs font-bold uppercase">Sep 2024 — Mar 2025</time>
+                        <h4 class="text-xl font-bold text-gray-900 mt-2">ENGLISH TEACHER</h4>
+                        <p class="text-gray-500">SEYTEK TUNGUCH Primary School</p>
+                    </div>
+                    <div class="absolute left-5 md:left-1/2 w-3 h-3 bg-blue-500 rounded-full border-4 border-white shadow transform md:-translate-x-1.5"></div>
+                    <div class="md:w-1/2 md:pl-12"></div>
+                </div>
+
+                <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-left">
+                    <div class="md:w-1/2 md:pr-12"></div>
+                    <div class="absolute left-5 md:left-1/2 w-3 h-3 bg-green-500 rounded-full border-4 border-white shadow transform md:-translate-x-1.5"></div>
+                    <div class="md:w-1/2 md:pl-12 text-center md:text-left mb-4 md:mb-0">
+                        <time class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-xs font-bold uppercase">2022 — Present</time>
+                        <h4 class="text-xl font-bold text-gray-900 mt-2">EDUCATIONAL COUNSELOR & FUNDRAISER</h4>
+                        <p class="text-gray-500">Omid Farda (Tomorrow's Hope) Orphanage, Kabul Afghanistan</p>
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-right">
+                    <div class="md:w-1/2 md:pr-12 text-center md:text-right mb-4 md:mb-0">
+                        <time class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-xs font-bold uppercase">Feb 2023 — Jul 2024</time>
+                        <h4 class="text-xl font-bold text-gray-900 mt-2">ENGLISH AND ROBOTICS TEACHER</h4>
+                        <p class="text-gray-500">Kabul Omid Afghan-Turk High School</p>
+                    </div>
+                    <div class="absolute left-5 md:left-1/2 w-3 h-3 bg-blue-500 rounded-full border-4 border-white shadow transform md:-translate-x-1.5"></div>
+                    <div class="md:w-1/2 md:pl-12"></div>
+                </div>
+
+                <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-left">
+                    <div class="md:w-1/2 md:pr-12"></div>
+                    <div class="absolute left-5 md:left-1/2 w-3 h-3 bg-green-500 rounded-full border-4 border-white shadow transform md:-translate-x-1.5"></div>
+                    <div class="md:w-1/2 md:pl-12 text-center md:text-left mb-4 md:mb-0">
+                        <time class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-xs font-bold uppercase">Jul 2019 — Jan 2022</time>
+                        <h4 class="text-xl font-bold text-gray-900 mt-2">VICE PRINCIPAL AND TEACHER</h4>
+                        <p class="text-gray-500">BEHNAWESHT High School</p>
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-right">
+                    <div class="md:w-1/2 md:pr-12 text-center md:text-right mb-4 md:mb-0">
+                        <time class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-xs font-bold uppercase">Mar 2018 — Jul 2019</time>
+                        <h4 class="text-xl font-bold text-gray-900 mt-2">ENGLISH & IT TEACHER, GRAPHIC DESIGNER</h4>
+                        <p class="text-gray-500">Omid Afghan Turk High School</p>
+                    </div>
+                    <div class="absolute left-5 md:left-1/2 w-3 h-3 bg-blue-500 rounded-full border-4 border-white shadow transform md:-translate-x-1.5"></div>
+                    <div class="md:w-1/2 md:pl-12"></div>
+                </div>
+
+                <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-left">
+                    <div class="md:w-1/2 md:pr-12"></div>
+                    <div class="absolute left-5 md:left-1/2 w-3 h-3 bg-green-500 rounded-full border-4 border-white shadow transform md:-translate-x-1.5"></div>
+                    <div class="md:w-1/2 md:pl-12 text-center md:text-left mb-4 md:mb-0">
+                        <time class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-xs font-bold uppercase">Feb 2022 — Feb 2023</time>
+                        <h4 class="text-xl font-bold text-gray-900 mt-2">HEAD OF IT DEPARTMENT AND OLYMPIAD COUNSELOR</h4>
+                        <p class="text-gray-500">Ariana Afghan Turk Boys High School (ATCE NGO)</p>
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-right">
+                    <div class="md:w-1/2 md:pr-12 text-center md:text-right mb-4 md:mb-0">
+                        <time class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-xs font-bold uppercase">Apr 2015 — Jul 2017</time>
+                        <h4 class="text-xl font-bold text-gray-900 mt-2">IT ADMIN AND MEDIA MANAGER</h4>
+                        <p class="text-gray-500">Balkh University, Information Technology Center Balkh (ITCB)</p>
+                    </div>
+                    <div class="absolute left-5 md:left-1/2 w-3 h-3 bg-blue-500 rounded-full border-4 border-white shadow transform md:-translate-x-1.5"></div>
+                    <div class="md:w-1/2 md:pl-12"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="py-24 bg-gray-50 px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">Education</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100" data-aos="fade-up">
+                    <div class="text-accentBlue font-bold mb-2">2024 - 2026</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">Master of Arts in Applied Psychology</h3>
+                    <p class="text-gray-600">American University of Central Asia (AUCA)</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100" data-aos="fade-up">
+                    <div class="text-accentBlue font-bold mb-2">2014 - 2017</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">Bachelor's Degree in Software Engineering</h3>
+                    <p class="text-gray-600">Balkh University</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100" data-aos="fade-up">
+                    <div class="text-accentBlue font-bold mb-2">2009 - 2013</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">High School Diploma</h3>
+                    <p class="text-gray-600">Herat Afghan-Turk High School (ATCE Org.)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates & Licenses Section -->
+    <section id="certificates" class="py-24 bg-white px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">Certifications & Licenses</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                
+                <div class="certificate-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="certificate-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">AI in Education Seminar</h3>
+                    <p class="text-sm text-gray-600">HeraEdu Organization</p>
+                </div>
+
+                <div class="certificate-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="150">
+                    <div class="certificate-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Outreach Program Coordinator</h3>
+                    <p class="text-sm text-gray-600">Instructor & Project Coordinator for Afghan Refugee Children - Spirit of America</p>
+                </div>
+
+                <div class="certificate-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="certificate-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Duolingo English Test</h3>
+                    <p class="text-sm text-gray-600">Score: 135/160</p>
+                </div>
+
+                <div class="certificate-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="250">
+                    <div class="certificate-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">CodeWeekend Boot Camp</h3>
+                    <p class="text-sm text-gray-600">Web Development Certification 2022</p>
+                </div>
+
+                <div class="certificate-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="certificate-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Teacher of the Month</h3>
+                    <p class="text-sm text-gray-600">Multiple Nominations 2023</p>
+                </div>
+
+                <div class="certificate-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="350">
+                    <div class="certificate-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Best Application Idea Award</h3>
+                    <p class="text-sm text-gray-600">iLabs Innovations - Healthcare Sector Innovation</p>
+                </div>
+
+                <div class="certificate-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="400">
+                    <div class="certificate-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">IT Competition Excellence</h3>
+                    <p class="text-sm text-gray-600">Certificate of Participation - 1st IT Competition, Balkh University</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Languages Section -->
+    <section id="languages" class="py-24 bg-gray-50 px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">Languages</h2>
+            <div class="flex flex-wrap gap-4 justify-center" data-aos="fade-up">
+                
+                <div class="language-badge">
+                    <span class="language-icon"><i class="fas fa-globe"></i></span>
+                    <span>English</span>
+                </div>
+
+                <div class="language-badge">
+                    <span class="language-icon"><i class="fas fa-book"></i></span>
+                    <span>Persian</span>
+                </div>
+
+                <div class="language-badge">
+                    <span class="language-icon"><i class="fas fa-comments"></i></span>
+                    <span>Turkish</span>
+                </div>
+
+                <div class="language-badge">
+                    <span class="language-icon"><i class="fas fa-language"></i></span>
+                    <span>Uzbek</span>
+                </div>
+
+                <div class="language-badge">
+                    <span class="language-icon"><i class="fas fa-flag"></i></span>
+                    <span>Kyrgyz</span>
+                </div>
+
+                <div class="language-badge">
+                    <span class="language-icon"><i class="fas fa-microphone"></i></span>
+                    <span>Pashto</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white py-16 px-6 text-center border-t">
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">Hakhamanesh Karimi</h3>
+        <p class="text-gray-500 mb-8">kh13368@auca.kg | +344689505741</p>
+        <div class="flex justify-center space-x-8 text-3xl mb-8">
+            <a href="https://af.linkedin.com/in/hakhamaneshkarimi" target="_blank" class="text-gray-300 hover:text-blue-700 transition"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/iamhakhamanesh/" target="_blank" class="text-gray-300 hover:text-pink-600 transition"><i class="fab fa-instagram"></i></a>
+            <a href="https://hakhamanesh.netlify.app" target="_blank" class="text-gray-300 hover:text-accentBlue transition"><i class="fas fa-globe"></i></a>
+        </div>
+        <p class="text-xs text-gray-400">© 2026 Designed for Hakhamanesh Karimi</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        
+        const swiper = new Swiper(".mySwiper", {
+            loop: true,
+            autoplay: { delay: 5000 },
+            pagination: { el: ".swiper-pagination", clickable: true },
+            navigation: {
+                nextEl: ".swiper-nav-button.next",
+                prevEl: ".swiper-nav-button.prev",
+            },
+        });
+
+        // Update slide counter
+        function updateSlideCounter() {
+            const currentSlide = swiper.realIndex + 1;
+            const totalSlides = swiper.slides.length - 2; // Subtract cloned slides
+            document.querySelector('.current-slide').textContent = currentSlide;
+            document.querySelector('.total-slides').textContent = totalSlides;
+        }
+
+        swiper.on('slideChange', updateSlideCounter);
+        updateSlideCounter();
+    </script>
+</body>
+</html>
