@@ -3,26 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Portfolio of Hakhamanesh Karimi - Educator, Counselor & Software Engineer specializing in Python, Web Development, and Psychology.">
-	<meta name="keywords" content="Hakhamanesh Karimi, Software Engineer, Educator, Psychology, Web Developer, Portfolio">
-	<meta name="author" content="Hakhamanesh Karimi">
-
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="https://hakhamanesh.netlify.app/">
-	<meta property="og:title" content="Hakhamanesh Karimi | Educator & Developer">
-	<meta property="og:description" content="Explore the professional portfolio of Hakhamanesh Karimi, featuring projects in software engineering and educational counseling.">
-	<meta property="og:image" content="https://your-website-url.com/assets/profile.jpg">
-
-	<meta property="twitter:card" content="summary_large_image">
-	<meta property="twitter:title" content="Hakhamanesh Karimi | Educator & Developer">
-	<meta property="twitter:description" content="Master of Psychology and Bachelor of Software Engineering.">
-	<meta property="twitter:image" content="https://your-website-url.com/assets/profile.jpg">
-	
     <title>Hakhamanesh Karimi | Educator, Counselor & Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-	
-	<link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -234,12 +217,87 @@
         .language-icon {
             margin-right: 8px;
             font-size: 18px;
+.custom-nav-btn {
+        width: 48px;
+        height: 48px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(4px);
+        border-radius: 50%;
+        color: #1f2937; /* Dark Gray */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        z-index: 20;
+        cursor: pointer;
+    }
+
+    .custom-nav-btn:hover {
+        background: #fff;
+        transform: scale(1.1);
+        color: #2563eb; /* Blue hover */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Position overrides for the buttons */
+    .nav-prev { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); }
+    .nav-next { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); }
+    
+    /* Ensure hover effect handles the centering transform correctly */
+    .nav-prev:hover, .nav-next:hover { transform: translateY(-50%) scale(1.1); }
+
+    /* Custom Pagination Dots */
+    .swiper-pagination-bullet {
+        background: rgba(255, 255, 255, 0.5) !important;
+        opacity: 1;
+    }
+    .swiper-pagination-bullet-active {
+        background: #ffffff !important;
+        width: 24px;
+        border-radius: 10px;
+        transition: width 0.3s ease;
+    }
         }
-    </style>
+/* Custom Navigation Buttons */
+.custom-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 30;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.custom-nav-btn:hover {
+    background: #ffffff;
+    transform: translateY(-50%) scale(1.1);
+    color: #3b82f6; /* Accent Blue */
+}
+
+.nav-prev { left: -25px; } /* Pulls it slightly off-center for a modern look */
+.nav-next { right: -25px; }
+
+/* Hide buttons on mobile if they overlap too much, or keep them inside */
+@media (max-width: 768px) {
+    .nav-prev { left: 10px; }
+    .nav-next { right: 10px; }
+    .custom-nav-btn { width: 40px; height: 40px; }
+}    </style>
 </head>
 <body class="bg-[#f9fafb] text-gray-800 antialiased font-sans">
 
-    <nav class="fixed w-full z-50 glass shadow-sm">
+    <nav class="fixed w-full z-50 glass shadow-sm x-data="{ open: false }">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <span class="text-xl font-bold text-gray-900 tracking-tight">Hakhamanesh Karimi</span>
             <div class="hidden md:flex space-x-8 items-center font-medium">
@@ -253,6 +311,7 @@
             </div>
         </div>
     </nav>
+	
 
 
     <section class="pt-40 pb-20 bg-gradient-to-br from-brandBlue to-white text-center px-6">
@@ -270,178 +329,59 @@
         </div>
     </section>
 
-    <section class="max-w-6xl mx-auto px-6 mb-32" data-aos="fade-up">
-        <div class="slider-wrapper">
-            <div class="swiper mySwiper rounded-[2rem] shadow-2xl overflow-hidden aspect-[16/9] md:aspect-[21/9]">
-                <div class="swiper-wrapper">
-                    
-                    <div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_1.webp" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_1.webp" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div>
-			------------
- 			<div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_2.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_2.webp" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div>
-			
-			<div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_3.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_3.webp" loading="lazy" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div>
-		
-			<div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_4.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_4.webp" loading="lazy" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div>
-<div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_5.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_5.webp" loading="lazy" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_6.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_6.webp" loading="lazy" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_7.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_7.webp" loading="lazy" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_8.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_8.webp" loading="lazy" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_9.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_9.webp" loading="lazy"class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_10.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_10.webp" loading="lazy" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_11.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_11.webp" loading="lazy" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_12.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_12.webp" loading="lazy" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_13.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_13.webp" loading="lazy" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_14.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_14.webp" loading="lazy" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div><div class="swiper-slide relative bg-black overflow-hidden flex items-center justify-center">
-                        <!-- Blurred Background for Portrait/Mixed Aspect Ratios -->
-                        <img src="assets/slider_15.webp" loading="lazy" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110">
-                        <!-- Main Image -->
-                        <img src="assets/slider_15.webp" loading="lazy" class="relative z-10 max-h-full max-w-full object-contain shadow-2xl">
-                        <!-- Caption Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent p-8">
-                            <h3 class="text-white text-2xl md:text-4xl font-bold"></h3>
-                        </div>
-                    </div>
-                    
-		
-                    </div>
-                    -->
-                </div>
-                
-                <!-- Navigation Arrows -->
-                <button class="swiper-nav-button prev" aria-label="Previous slide">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="swiper-nav-button next" aria-label="Next slide">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                
-                <!-- Slide Counter -->
-                <div class="slide-counter">
-                    <span class="current-slide">1</span> / <span class="total-slides">4</span>
-                </div>
-                
-                <!-- Pagination Dots -->
-                <div class="swiper-pagination"></div>
+    <section>
+
+<div class="max-w-6xl mx-auto px-8 md:px-16 mb-20 relative group">
+    <div class="swiper mySwiper w-full aspect-[4/3] md:aspect-video rounded-2xl shadow-2xl overflow-hidden bg-gray-900">
+        <div class="swiper-wrapper" id="slider-container">
             </div>
-        </div>
-    </section>
+        <div class="swiper-pagination pb-4"></div>
+    </div>
+
+    <div class="custom-nav-btn nav-prev prev-slide">
+        <i class="fas fa-chevron-left"></i>
+    </div>
+    <div class="custom-nav-btn nav-next next-slide">
+        <i class="fas fa-chevron-right"></i>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // 1. Generate the 15 Slides
+    const totalSlides = 15;
+    const sliderContainer = document.getElementById('slider-container');
+    let slidesHTML = '';
+
+    for (let i = 1; i <= totalSlides; i++) {
+        const loadingAttr = i === 1 ? 'eager' : 'lazy';
+        slidesHTML += `
+            <div class="swiper-slide relative bg-black flex items-center justify-center">
+                <img src="assets/slider_${i}.webp" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110" loading="${loadingAttr}">
+                <img src="assets/slider_${i}.webp" class="relative z-10 w-full h-full object-contain" loading="${loadingAttr}" alt="Project ${i}">
+            </div>`;
+    }
+    sliderContainer.innerHTML = slidesHTML;
+
+    // 2. Initialize Swiper with Navigation enabled
+    const swiper = new Swiper(".mySwiper", {
+        loop: true,
+        speed: 800,
+        autoplay: { delay: 5000 },
+        pagination: { 
+            el: ".swiper-pagination", 
+            clickable: true 
+        },
+        // IMPORTANT: This links the HTML buttons to the Swiper logic
+        navigation: {
+            nextEl: ".next-slide",
+            prevEl: ".prev-slide",
+        },
+    });
+});
+</script>   
+ </section>
+	
 
     <section id="about" class="py-24 bg-white px-6" data-aos="fade-up">
         <div class="max-w-4xl mx-auto text-center">
