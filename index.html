@@ -297,20 +297,61 @@
 </head>
 <body class="bg-[#f9fafb] text-gray-800 antialiased font-sans">
 
-    <nav class="fixed w-full z-50 glass shadow-sm x-data="{ open: false }">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="text-xl font-bold text-gray-900 tracking-tight">Hakhamanesh Karimi</span>
-            <div class="hidden md:flex space-x-8 items-center font-medium">
-                <a href="index.html" class="hover:text-accentBlue transition">Home</a>
-                <a href="#experience" class="hover:text-accentBlue transition">Experience</a>
-                <a href="#skills" class="hover:text-accentBlue transition">Skills</a>
-                <a href="contact.html" class="hover:text-accentBlue transition">Contact</a>
-                <a href="assets/Hakhamanesh_Karimi_CV.pdf" download class="bg-accentBlue/10 text-accentBlue px-4 py-2 rounded-full hover:bg-accentBlue hover:text-white transition-all flex items-center border border-accentBlue/20">
-                    <i class="fas fa-file-download mr-2"></i> CV
-                </a>
-            </div>
+   <nav class="fixed w-full z-50 glass shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <span class="text-xl font-bold text-gray-900 tracking-tight">Hakhamanesh Karimi</span>
+        
+        <div class="hidden md:flex space-x-8 items-center font-medium">
+            <a href="index.html" class="hover:text-accentBlue transition">Home</a>
+            <a href="#experience" class="hover:text-accentBlue transition">Experience</a>
+            <a href="#skills" class="hover:text-accentBlue transition">Skills</a>
+            <a href="contact.html" class="hover:text-accentBlue transition">Contact</a>
+            <a href="assets/Hakhamanesh_Karimi_CV.pdf" download class="bg-accentBlue text-white px-5 py-2 rounded-full hover:bg-blue-600 transition shadow-md">
+                <i class="fas fa-file-download mr-2"></i>CV
+            </a>
         </div>
-    </nav>
+
+        <button id="mobile-menu-btn" class="md:hidden text-2xl text-gray-800 focus:outline-none">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t absolute w-full left-0 top-full shadow-lg flex flex-col p-6 space-y-4">
+        <a href="index.html" class="block hover:text-accentBlue py-2 border-b border-gray-50">Home</a>
+        <a href="#experience" class="block hover:text-accentBlue py-2 border-b border-gray-50">Experience</a>
+        <a href="#skills" class="block hover:text-accentBlue py-2 border-b border-gray-50">Skills</a>
+        <a href="contact.html" class="block hover:text-accentBlue py-2 border-b border-gray-50">Contact</a>
+        <a href="assets/Hakhamanesh_Karimi_CV.pdf" download class="text-accentBlue font-bold py-2">
+            <i class="fas fa-file-download mr-2"></i>Download CV
+        </a>
+    </div>
+</nav>
+
+<script>
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    // Toggle menu visibility
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        const icon = btn.querySelector('i');
+        
+        // Switch between hamburger and 'X' icon
+        if (menu.classList.contains('hidden')) {
+            icon.className = 'fas fa-bars';
+        } else {
+            icon.className = 'fas fa-times';
+        }
+    });
+
+    // Close menu when a link is clicked (important for single-page scrolling)
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.add('hidden');
+            btn.querySelector('i').className = 'fas fa-bars';
+        });
+    });
+</script>
 	
 
 
