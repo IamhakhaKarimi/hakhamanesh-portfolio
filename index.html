@@ -24,6 +24,7 @@
   ]
 }
 </script>
+    
     <script>
         tailwind.config = {
             theme: {
@@ -311,7 +312,7 @@
 </head>
 <body class="bg-[#f9fafb] text-gray-800 antialiased font-sans">
 
-   <nav class="fixed w-full z-50 glass shadow-sm">
+    <nav class="fixed w-full z-50 glass shadow-sm">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <span class="text-xl font-bold text-gray-900 tracking-tight">Hakhamanesh Karimi</span>
         
@@ -320,6 +321,9 @@
             <a href="#experience" class="hover:text-accentBlue transition">Experience</a>
             <a href="#skills" class="hover:text-accentBlue transition">Skills</a>
             <a href="contact.html" class="hover:text-accentBlue transition">Contact</a>
+            <a href="documents.html" class="border border-accentBlue text-accentBlue px-5 py-2 rounded-full hover:bg-accentBlue hover:text-white transition">
+                <i class="fas fa-folder-open mr-2"></i>Documents
+            </a>
             <a href="assets/Hakhamanesh_Karimi_CV.pdf" download class="bg-accentBlue text-white px-5 py-2 rounded-full hover:bg-blue-600 transition shadow-md">
                 <i class="fas fa-file-download mr-2"></i>CV
             </a>
@@ -335,6 +339,7 @@
         <a href="#experience" class="block hover:text-accentBlue py-2 border-b border-gray-50">Experience</a>
         <a href="#skills" class="block hover:text-accentBlue py-2 border-b border-gray-50">Skills</a>
         <a href="contact.html" class="block hover:text-accentBlue py-2 border-b border-gray-50">Contact</a>
+        <a href="documents.html" class="block hover:text-accentBlue py-2 border-b border-gray-50"><i class="fas fa-folder-open mr-2"></i>Documents</a>
         <a href="assets/Hakhamanesh_Karimi_CV.pdf" download class="text-accentBlue font-bold py-2">
             <i class="fas fa-file-download mr-2"></i>Download CV
         </a>
@@ -371,7 +376,7 @@
 
     <section class="pt-40 pb-20 bg-gradient-to-br from-brandBlue to-white text-center px-6">
         <div data-aos="fade-up">
-            <img src="assets/profile.webp" alt="Hakhamanesh Karimi - Professional Portrait" class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-6 border-4 border-white shadow-lg object-cover ">
+            <img src="assets/profile.webp" alt="Hakhamanesh Karimi - Professional Portrait" class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-6 border-4 border-white shadow-lg object-cover">
             <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6">Hakhamanesh Karimi</h1>
             <p class="text-xl md:text-3xl text-gray-600 mb-8 font-light italic">Educator, Counselor & Developer</p>
             <div class="flex justify-center space-x-6 mb-12">
@@ -403,19 +408,26 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    // 1. Generate the 15 Slides
-    const totalSlides = 15;
+    // 1. Generate the slides
+    const slides = [
+        ...Array.from({ length: 16 }, (_, i) => `slider_${i + 1}.webp`),
+        'slider_17.jpg',   // TKCO Certificate of Appreciation
+        'slider_18.webp',  // Online session with Fabio Diamante & colleagues
+        'slider_19.webp',  // Online session with Fabio Diamante & colleagues
+        'slider_20.webp',  // Psychology class – Emotions
+        'slider_21.webp'   // Classroom – whiteboard activity
+    ];
     const sliderContainer = document.getElementById('slider-container');
     let slidesHTML = '';
 
-    for (let i = 1; i <= totalSlides; i++) {
-        const loadingAttr = i === 1 ? 'eager' : 'lazy';
+    slides.forEach((file, idx) => {
+        const loadingAttr = idx === 0 ? 'eager' : 'lazy';
         slidesHTML += `
             <div class="swiper-slide relative bg-black flex items-center justify-center">
-                <img src="assets/slider_${i}.webp" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110" loading="${loadingAttr}">
-                <img src="assets/slider_${i}.webp" class="relative z-10 w-full h-full object-contain" loading="${loadingAttr}" alt="Project ${i}">
+                <img src="assets/${file}" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110" loading="${loadingAttr}" alt="">
+                <img src="assets/${file}" class="relative z-10 w-full h-full object-contain" loading="${loadingAttr}" alt="Portfolio photo ${idx + 1}">
             </div>`;
-    }
+    });
     sliderContainer.innerHTML = slidesHTML;
 
     // 2. Initialize Swiper with Navigation enabled
@@ -666,9 +678,31 @@
                     <p class="text-sm text-gray-600">Certificate of Participation - 1st IT Competition, Balkh University</p>
                 </div>
 
+                <div class="certificate-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="450">
+                    <div class="certificate-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Certificate of Appreciation</h3>
+                    <p class="text-sm text-gray-600">Volunteer Member - Tesamuh Knowledge and Cultural Organization (TKCO), 2023</p>
+                </div>
+
+                <div class="certificate-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="500">
+                    <div class="certificate-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Letter of Recommendation</h3>
+                    <p class="text-sm text-gray-600">Fabio Diamante</p>
+                </div>
+
             </div>
         </div>
     </section>
+
+    <div class="bg-white text-center pb-16 -mt-8">
+        <a href="documents.html" class="inline-flex items-center bg-accentBlue hover:bg-blue-800 text-white px-8 py-3 rounded-full font-semibold shadow-md transition">
+            <i class="fas fa-folder-open mr-2"></i>View &amp; Print All Documents
+        </a>
+    </div>
 
     <!-- Languages Section -->
     <section id="languages" class="py-24 bg-gray-50 px-6">

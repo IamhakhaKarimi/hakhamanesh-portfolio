@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents | Hakhamanesh Karimi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: { brandBlue: '#dbeafe', brandGreen: '#d1fae5', accentBlue: '#3b82f6', ctaGreen: '#10b981' }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .doc-card { transition: transform .2s ease, box-shadow .2s ease; }
+        .doc-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(59,130,246,.15); }
+        .filter-btn[aria-pressed="true"] { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+        #doc-modal { transition: opacity .2s ease; }
+        #doc-modal.hidden-modal { opacity: 0; pointer-events: none; }
+        #doc-modal .panel { transition: transform .2s ease-out; }
+        #doc-modal.hidden-modal .panel { transform: scale(.97); }
+        @media (prefers-reduced-motion: reduce) { .doc-card, #doc-modal, #doc-modal .panel { transition: none; } }
+    </style>
+</head>
+<body class="bg-[#f9fafb] text-gray-800 antialiased font-sans">
+
+<a href="#docs" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white px-4 py-2 rounded z-[60]">Skip to documents</a>
+
+<nav class="fixed w-full z-50 glass shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="index.html" class="text-xl font-bold text-gray-900 tracking-tight">Hakhamanesh Karimi</a>
+        <div class="hidden md:flex space-x-8 items-center font-medium">
+            <a href="index.html" class="hover:text-accentBlue transition">Home</a>
+            <a href="index.html#experience" class="hover:text-accentBlue transition">Experience</a>
+            <a href="index.html#certificates" class="hover:text-accentBlue transition">Certificates</a>
+            <a href="contact.html" class="hover:text-accentBlue transition">Contact</a>
+            <a href="documents.html" aria-current="page" class="bg-accentBlue text-white px-5 py-2 rounded-full shadow-md">
+                <i class="fas fa-folder-open mr-2"></i>Documents
+            </a>
+        </div>
+        <button id="mobile-menu-btn" aria-label="Open menu" class="md:hidden text-2xl text-gray-800 w-11 h-11">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t absolute w-full left-0 top-full shadow-lg flex flex-col p-6 space-y-4">
+        <a href="index.html" class="block hover:text-accentBlue py-2 border-b border-gray-50">Home</a>
+        <a href="index.html#experience" class="block hover:text-accentBlue py-2 border-b border-gray-50">Experience</a>
+        <a href="index.html#certificates" class="block hover:text-accentBlue py-2 border-b border-gray-50">Certificates</a>
+        <a href="contact.html" class="block hover:text-accentBlue py-2 border-b border-gray-50">Contact</a>
+        <a href="documents.html" class="text-accentBlue font-bold py-2"><i class="fas fa-folder-open mr-2"></i>Documents</a>
+    </div>
+</nav>
+
+<header class="pt-36 pb-12 bg-gradient-to-br from-brandBlue to-white text-center px-6">
+    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Documents &amp; Certificates</h1>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Open any document to preview it, then print or download it.</p>
+</header>
+
+<main id="docs" class="max-w-6xl mx-auto px-6 pb-24">
+    <div class="flex flex-wrap gap-3 justify-center mb-10" role="group" aria-label="Filter documents">
+        <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-filter="certificate" aria-pressed="false">Certificates</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-filter="letter" aria-pressed="false">Letters</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-filter="correspondence" aria-pressed="false">Correspondence</button>
+    </div>
+    <div id="doc-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+</main>
+
+<!-- Viewer modal -->
+<div id="doc-modal" class="hidden-modal fixed inset-0 z-[100] bg-black/60 flex items-center justify-center p-2 md:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="panel bg-white rounded-2xl shadow-2xl w-full max-w-5xl h-[92dvh] flex flex-col overflow-hidden">
+        <div class="flex items-center justify-between gap-3 px-4 md:px-6 py-3 border-b">
+            <h2 id="modal-title" class="font-semibold text-gray-900 truncate"></h2>
+            <div class="flex items-center gap-2 shrink-0">
+                <button id="modal-print" class="bg-accentBlue hover:bg-blue-800 text-white px-4 h-11 rounded-full font-medium transition">
+                    <i class="fas fa-print md:mr-2"></i><span class="hidden md:inline">Print</span>
+                </button>
+                <a id="modal-download" download class="border border-gray-300 hover:bg-gray-100 px-4 h-11 rounded-full font-medium inline-flex items-center transition" aria-label="Download">
+                    <i class="fas fa-download md:mr-2"></i><span class="hidden md:inline">Download</span>
+                </a>
+                <button id="modal-close" class="w-11 h-11 rounded-full hover:bg-gray-100 text-xl transition" aria-label="Close viewer">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div id="modal-body" class="flex-1 bg-gray-100"></div>
+    </div>
+</div>
+
+<footer class="py-10 text-center text-sm text-gray-500 border-t">
+    &copy; <span id="year"></span> Hakhamanesh Karimi
+</footer>
+
+<script>
+    // Add new documents here — files live in assets/documents/
+    const DOCS = [
+        { title: 'Certificate of Appreciation – TKCO', desc: 'Volunteer member, Tesamuh Knowledge and Cultural Organization (2023)', file: 'assets/slider_17.jpg', type: 'image', cat: 'certificate', icon: 'fa-hands-helping' },
+        { title: 'Letter of Recommendation – Fabio Diamante', desc: 'Recommendation letter', file: 'assets/documents/recommendation-fabio-diamante.pdf', type: 'pdf', cat: 'letter', icon: 'fa-envelope-open-text' },
+        { title: 'Letter of Recommendation – Nisar Sharifi', desc: 'On behalf of Kabul Omid Afghan Turk High School', file: 'assets/documents/recommendation-2.pdf', type: 'pdf', cat: 'letter', icon: 'fa-envelope-open-text' },
+        { title: 'Duolingo English Test Certificate', desc: 'Official score certificate', file: 'assets/documents/duolingo-certificate.pdf', type: 'pdf', cat: 'certificate', icon: 'fa-language' },
+        { title: 'Certificate', desc: 'Certificate document', file: 'assets/documents/certificate.pdf', type: 'pdf', cat: 'certificate', icon: 'fa-award' },
+        { title: 'Certificates – Part 1', desc: 'Collected certificates', file: 'assets/documents/certificates-1.pdf', type: 'pdf', cat: 'certificate', icon: 'fa-certificate' },
+        { title: 'Certificates – Part 2', desc: 'Collected certificates', file: 'assets/documents/certificates-2.pdf', type: 'pdf', cat: 'certificate', icon: 'fa-certificate' },
+        { title: "A Closer Look at Brown's Academic Experience", desc: 'Brown University – counselor correspondence', file: 'assets/documents/brown-academic-experience.pdf', type: 'pdf', cat: 'correspondence', icon: 'fa-university' },
+        { title: 'For Counselors: Updates from Tufts University', desc: 'Tufts University – counselor correspondence', file: 'assets/documents/tufts-counselor-updates.pdf', type: 'pdf', cat: 'correspondence', icon: 'fa-university' },
+        { title: 'Tufts Counselor Connection', desc: 'Tufts University – counselor correspondence', file: 'assets/documents/tufts-counselor-connection.pdf', type: 'pdf', cat: 'correspondence', icon: 'fa-university' },
+        { title: 'Duolingo Certificate (archive)', desc: 'RAR archive – download only', file: 'assets/documents/duolingo-certificate.rar', type: 'archive', cat: 'certificate', icon: 'fa-file-archive' }
+    ];
+
+    const grid = document.getElementById('doc-grid');
+    const modal = document.getElementById('doc-modal');
+    const body = document.getElementById('modal-body');
+    const printBtn = document.getElementById('modal-print');
+    const dl = document.getElementById('modal-download');
+    let current = null, lastFocus = null;
+
+    function render(filter) {
+        grid.innerHTML = DOCS.filter(d => filter === 'all' || d.cat === filter).map(d => {
+            const i = DOCS.indexOf(d);
+            const action = d.type === 'archive'
+                ? `<a href="${d.file}" download class="mt-auto inline-flex items-center justify-center h-11 rounded-full border border-accentBlue text-accentBlue font-medium hover:bg-accentBlue hover:text-white transition"><i class="fas fa-download mr-2"></i>Download</a>`
+                : `<button data-open="${i}" class="mt-auto inline-flex items-center justify-center h-11 rounded-full bg-accentBlue text-white font-medium hover:bg-blue-800 transition"><i class="fas fa-eye mr-2"></i>View &amp; Print</button>`;
+            return `<article class="doc-card bg-white rounded-2xl p-6 border border-gray-100 flex flex-col gap-3">
+                <div class="w-12 h-12 rounded-xl bg-brandBlue text-accentBlue flex items-center justify-center text-xl"><i class="fas ${d.icon}"></i></div>
+                <h3 class="font-bold text-gray-900">${d.title}</h3>
+                <p class="text-sm text-gray-600 mb-2">${d.desc}</p>
+                ${action}
+            </article>`;
+        }).join('');
+    }
+
+    function openDoc(i) {
+        current = DOCS[i];
+        lastFocus = document.activeElement;
+        document.getElementById('modal-title').textContent = current.title;
+        dl.href = current.file;
+        body.innerHTML = current.type === 'image'
+            ? `<div class="w-full h-full flex items-center justify-center p-4"><img src="${current.file}" alt="${current.title}" class="max-w-full max-h-full object-contain shadow-lg bg-white"></div>`
+            : `<iframe id="doc-frame" src="${current.file}" title="${current.title}" class="w-full h-full border-0"></iframe>`;
+        modal.classList.remove('hidden-modal');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('modal-close').focus();
+    }
+
+    function closeDoc() {
+        modal.classList.add('hidden-modal');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        setTimeout(() => { body.innerHTML = ''; }, 200);
+        if (lastFocus) lastFocus.focus();
+    }
+
+    function printDoc() {
+        if (!current) return;
+        if (current.type === 'image') {
+            const w = window.open('', '_blank');
+            w.document.write(`<html><head><title>${current.title}</title><style>@page{margin:10mm}body{margin:0;display:flex;justify-content:center}img{max-width:100%;max-height:100vh}</style></head><body><img src="${new URL(current.file, location.href)}" onload="window.print();window.close()"></body></html>`);
+            w.document.close();
+            return;
+        }
+        const frame = document.getElementById('doc-frame');
+        try {
+            frame.contentWindow.focus();
+            frame.contentWindow.print();
+        } catch (e) {
+            // Some browsers (e.g. Safari/Firefox mobile) block printing embedded PDFs — open it in a tab instead
+            window.open(current.file, '_blank');
+        }
+    }
+
+    grid.addEventListener('click', e => {
+        const b = e.target.closest('[data-open]');
+        if (b) openDoc(+b.dataset.open);
+    });
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        render(btn.dataset.filter);
+    }));
+    document.getElementById('modal-close').addEventListener('click', closeDoc);
+    printBtn.addEventListener('click', printDoc);
+    modal.addEventListener('click', e => { if (e.target === modal) closeDoc(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.classList.contains('hidden-modal')) closeDoc(); });
+
+    const mBtn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    mBtn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        mBtn.querySelector('i').className = menu.classList.contains('hidden') ? 'fas fa-bars' : 'fas fa-times';
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    render('all');
+</script>
+</body>
+</html>
